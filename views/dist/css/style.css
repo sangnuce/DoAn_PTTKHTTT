@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ margin: 0; background: #FFF; font-size: 12px; font-family: Arial; }
+.wrapper{ background: #f0eff0; width: 950px; margin: 0 auto; padding: 0; }
+.bgsite{float: left; width: 100%; box-shadow: 0 0 20px #000}
+a{ color: #136eb4; }
+a:visited{ color: #136eb4; }
+/*CSS FOR HEADER*/
+header{ width: 100%; float: left;  -webkit-user-select: none;}
+header .head{ background: #FFF url(../images/bgheader.jpg) 100% no-repeat; position: relative; width: 100%; float: left; margin: 0;
+text-align: center; text-shadow: 0 0 10px #000; color: #FFF; }
+header .head .logo{ background: #FFF url(../images/logo.png) 100% no-repeat; float: left; width: 125px; height: 125px; margin: 0 30px 0 0; padding: 0; }
+header .head p{ padding: 0; width: 500px; float: left; margin: 25px 30px; font-size: 30px; color: #FF0; }
+header .head p.hotline{ float: left; position: absolute; width: 100px; right: 0; bottom: 0; margin: 0; font-size: 20px; padding: 10px; }
+/*CSS FOR MENU NAVIGATION*/
+header .menu{ width: 100%; background: #bebebe; border-top: 5px solid #136eb4; float: left; padding: 0; margin: 0; }
+header .menu ul{ margin: 0 0 0 150px; padding: 0; float: left; }
+header .menu ul li{ list-style: none; float: left; }
+header .menu ul li a{ float: left; margin: 0; padding: 10px 30px; text-decoration: none; font-weight: bold; color: #000; border-right: 1px solid #000; text-transform: uppercase; }
+header .menu ul li a.actived{ background: #136eb4; color: #FFF; }
+header .menu ul li a:hover{ background: #136eb4; color: #FFF; }
+.main{ background: #f0eff0; width: 100%; float: left; margin: 0; padding: 0; }
+/*CSS CHO KHUNG TÌM KIẾM*/
+.main .content{ float: left; margin: 0; padding: 10px 25px; width: 650px; }
+.main .content h1{float: left; width: 100%; padding: 0; margin: 0;}
+.main .content .search{ float: left; width: 600px; margin: 10px 0; padding: 0 25px; }
+.main .content .search h3{ background: #bebebe; float: left; text-align: center; width: 100%; margin: 0; padding: 7px 0; border-radius: 5px 5px 0 0; }
+.main .content .search ul{ width: 100%; margin: 0; padding: 0; float: left; background: #FFF; }
+.main .content .search ul li{ text-align: center; margin: 0 0 0 2px; padding: 5px 0; float: left; width: 297px; list-style: none; }
+.main .content .search ul li p{ font-weight: bold; padding: 5px 0; margin: 0; }
+.main .content .search ul li input{ width: 200px; margin: 3px 5px; padding: 2px 0; }
+.main .content .search ul li button{ background: #FFF; border: 1px solid #000; font-weight: bold; }
+.main .content .search p.adv-search{float: left; width: 100%; margin: 0; padding: 0; background: #FFF;}
+.main .content .search p.adv-search a{text-decoration: none; border: 0; background: #136eb4; color: #FFF; margin: 0; padding: 7px 0; float: left; text-align: center; width: 100%; font-weight: bold }
+.main .content .search p.adv-search a:hover{text-decoration: underline}
+/*CSS CHO TOP NHÀ TRỌ*/
+.main .content .toprate{ float: left; width: 600px; margin: 10px 0; padding: 0 25px; }
+.main .content .toprate h3{ background: #bebebe; float: left; text-align: center; width: 100%; margin: 0; padding: 7px 0; border-radius: 5px 5px 0 0; }
+.main .content .toprate #show{ width: 600px; float: left; }
+.main .content .toprate #show ul{ width: 100%; margin: 0; padding: 0; float: left; background: #FFF; }
+.main .content .toprate #show ul li{ list-style:none; float:left; width: 200px; padding: 0; margin: 0; }
+.main .content .toprate #show ul li a{ float: left; width: 192px; margin: 0; padding: 4px; word-wrap: break-word; text-align: center; }
+.main .content .toprate #show ul li a:hover{ background: #1C97F5; color: #FFF; }
+.main .content .toprate #show ul li p{ text-align: left; float: left; width: 180px; height: 2em; overflow: hidden; padding: 5px 0; margin: 0 5px; }
+.main .content .toprate #show ul li img{ width: 175px; margin: 3px 0 0 0; }
+/*CSS CHO KHUNG ĐĂNG NHẬP*/
+.main .right{ float: left; width: 200px; margin: 0; padding: 10px 0; }
+.main .right .boxlogin{ float: left; background: #FFF; width: 100%; margin: 10px 0; padding: 0; }
+.main .right .boxlogin h3{ background: #bebebe; float: left; text-align: center; width: 100%; margin: 0; padding: 7px 0; border-radius: 5px 5px 0 0; }
+.main .right .boxlogin form{ float: left; width: 100%; margin: 0; padding: 3px 0 3px 5px; }
+.main .right .boxlogin form input{ float: left; width: 150px; padding: 3px; margin: 3px 0 5px 0; }
+.main .right .boxlogin form p{ margin: 0; padding: 0; float: left; width: 100% }
+.main .right .boxlogin form input[type='checkbox']{ float: left; margin: 1px; padding: 0; width: 20px }
+.main .right .boxlogin form button{ border: 0; background: #136eb4; color: #FFF; margin: 5px 0; padding: 7px; float: left; font-weight: bold }
+.main .right .boxlogin a{ text-decoration: none; float: left; margin: 0 5px 0 0; padding: 0; width: 100%}
+.main .right .boxlogin a:hover{ text-decoration: underline; color: #C00; }
+.main .right .boxlogin a:last-child{ border: 0; background: #136eb4; color: #FFF; margin: 5px 0; padding: 7px; float: left; text-align: center; width: 150px; font-weight: bold }
+/*CSS CHO CÂU HỎI THƯỜNG GẶP*/
+.main .right .faq{ float: left; width: 100%; background: #FFF; margin: 10px 0; padding: 0; }
+.main .right .faq h3{ background: #bebebe; float: left; text-align: center; width: 100%; margin: 0; padding: 7px 0; border-radius: 5px 5px 0 0; }
+.main .right .faq ul{ margin: 0; padding: 5px 0; float: left; width: 100%; }
+.main .right .faq ul li{ float: left; margin: 0; padding: 0; list-style: none; width: 100%}
+.main .right .faq ul li a{ margin: 0; padding: 5px; text-decoration: none; float: left; width: 190px; }
+.main .right .faq ul li a:hover{ background: #990; color: #FFF; }
+/*CSS CHO NÚT LIKE FB*/
+.main .right .fbbutton{ float: left; margin: 10px 0; padding: 0; width: 100%; background: #FFF; }
+.main .right .fbbutton h3{ background: #bebebe; float: left; text-align: center; width: 100%; margin: 0; padding: 7px 0; border-radius: 5px 5px 0 0; }
+.main .right .fbbutton div{ float: left; width: 100%; padding: 10px; margin: 0; }
+/*CSS CHO FOOTER*/
+footer{width: 100%; background: #136EB4; margin: 0; padding: 0;}
+footer nav{margin: 0; padding: 0; width: 100%; background: #136EB4}
+footer nav ul{margin: 0; height: 30px; padding: 0; width: 100%; background: #136EB4; text-align: center;}
+footer nav ul li{line-height: 30px; margin: 0; padding: 0; background: #FFF; list-style: none;}
+footer nav ul li a{height: 20px; color: #136EB4; padding: 10px 50px; margin: 0; text-decoration: none;}
+footer nav ul li:hover a{text-decoration: underline;}
