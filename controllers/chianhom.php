@@ -18,7 +18,11 @@ if (isset($_POST['btnsubmit'])) {
         $lib->insert('tbl_chianhom', array('manhom' => $manhom, 'matv' => $matv));
         $lib->update('tbl_thanhvien', array('ngaygianhap' => date('Y-m-d')), array('matv' => $matv));
         $lib->delete('tbl_bangdiem', array('matv' => $matv));
-
+        $lib->delete('tbl_traloi', array('matv' => $matv));
+        $lib->delete('tbl_dkthoigianpv', array('matv' => $matv));
     }
+    $_SESSION['message'] = array('class' => 'alert-success', 'content' => 'Chia nhóm thành viên mới thành công!');
+    header('Location: index.php?prog=thanhvien');
+    die();
 }
 ?>

@@ -21,6 +21,7 @@ if (isset($_GET['ajax'])) {
         try {
             $lib->delete('tbl_traloi');
             $lib->delete('tbl_dkthoigianpv');
+            $lib->delete('tbl_thoigianpv');
             $lib->delete('tbl_bangdiem');
             $strquery = "SELECT tbl_thanhvien.* FROM tbl_thanhvien LEFT JOIN tbl_chianhom ON tbl_thanhvien.matv = tbl_chianhom.matv WHERE manhom IS NULL AND ladoitruong=0";
             $dondangky = $lib->selectall($strquery);

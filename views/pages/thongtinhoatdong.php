@@ -73,7 +73,7 @@
                         </thead>
                         <tbody id="listtv-body">
                         <?php foreach ($listtv as $tv) { ?>
-                            <tr class="listtv <?php echo $tv['matv'] ?>">
+                            <tr>
                                 <td><?php echo $tv['tennhom'] ?></td>
                                 <td><?php echo $tv['hoten'] ?></td>
                                 <td><?php echo $lib->dateformat($tv['ngaysinh']) ?></td>
@@ -133,7 +133,7 @@
                         </thead>
                         <tbody>
                         <?php foreach ($thanhvien as $tv) { ?>
-                            <tr class="thanhvien <?php echo $tv['matv'] ?>">
+                            <tr>
                                 <td><?php echo $tv['tennhom'] ?></td>
                                 <td><?php echo $tv['hoten'] ?></td>
                                 <td><?php echo $lib->dateformat($tv['ngaysinh']) ?></td>
@@ -195,7 +195,7 @@
                         </thead>
                         <tbody>
                         <?php foreach ($nhiemvu as $nv) { ?>
-                            <tr class="nhiemvu <?php echo $nv['manv'] ?>">
+                            <tr>
                                 <td><?php echo $nv['noidung'] ?></td>
                                 <td>
                                     <button type="button" class="btn btn-info editnv" data-toggle="modal"
@@ -226,93 +226,91 @@
             <!-- /.box -->
         </div>
         <!-- /.col -->
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Chi tiết phân công nhiệm vụ</h3>
+        <?php if (count($nhiemvu) > 0) { ?>
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border bg-danger">
+                        <h3 class="box-title">Chi tiết phân công nhiệm vụ</h3>
+                    </div>
                 </div>
+                <?php foreach ($nhiemvu as $nv) { ?>
+                    <div class="box">
+                        <div class="box-header with-border" data-toggle="collapse"
+                             data-target="#nhiemvu<?php echo $nv['manv'] ?>">
+                            <h3 class="box-title"><?php echo $nv['noidung'] ?></h3>
+                        </div>
+                        <div class="box-body collapse" id="nhiemvu<?php echo $nv['manv'] ?>">
+                            <table id="dsphancong<?php echo $nv['manv'] ?>"
+                                   class="datatable table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Nhóm</th>
+                                    <th>Họ tên</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Giới tính</th>
+                                    <th>SĐT</th>
+                                    <th>TG bắt đầu</th>
+                                    <th>TG kết thúc</th>
+                                    <th>Sửa</th>
+                                    <th>Xoá</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($phancong[$nv['manv']] as $tv) {
+                                    foreach ($tv['phancong'] as $pc) { ?>
+                                        <tr>
+                                            <td><?php echo $tv['tennhom'] ?></td>
+                                            <td><?php echo $tv['hoten'] ?></td>
+                                            <td><?php echo $lib->dateformat($tv['ngaysinh']) ?></td>
+                                            <td><?php echo $tv['gioitinh'] == 1 ? 'Nam' : 'Nữ' ?></td>
+                                            <td><?php echo $tv['sdt'] ?></td>
+                                            <td><?php echo $lib->dateformat($pc['tgbatdau'], 1) ?></td>
+                                            <td><?php echo $lib->dateformat($pc['tgketthuc'], 1) ?></td>
+                                            <td>
+                                                <button type="button" class="btn btn-info editpc" data-toggle="modal"
+                                                        data-target="#detail" data-id="<?php echo $pc['mapc'] ?>"><i
+                                                        class="fa fa-pencil"></i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger removepc"
+                                                        data-id="<?php echo $pc['mapc'] ?>"><i
+                                                        class="fa fa-remove"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                } ?>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Nhóm</th>
+                                    <th>Họ tên</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Giới tính</th>
+                                    <th>SĐT</th>
+                                    <th>TG bắt đầu</th>
+                                    <th>TG kết thúc</th>
+                                    <th>Sửa</th>
+                                    <th>Xoá</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                <?php } ?>
             </div>
-            <?php foreach ($nhiemvu as $nv) { ?>
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title"><?php echo $nv['noidung'] ?></h3>
-                    </div>
-                    <div class="box-body">
-                        <table id="dsphancong<?php echo $nv['manv'] ?>"
-                               class="datatable table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>Nhóm</th>
-                                <th>Họ tên</th>
-                                <th>Ngày sinh</th>
-                                <th>Giới tính</th>
-                                <th>SĐT</th>
-                                <th>TG bắt đầu</th>
-                                <th>TG kết thúc</th>
-                                <th>Sửa</th>
-                                <th>Xoá</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            foreach ($phancong[$nv['manv']] as $tv) {
-                                foreach ($tv['phancong'] as $pc) {
-                                    ?>
-
-                                    <tr class="phancong <?php echo $pc['mapc'] ?>">
-                                        <td><?php echo $tv['tennhom'] ?></td>
-                                        <td><?php echo $tv['hoten'] ?></td>
-                                        <td><?php echo $lib->dateformat($tv['ngaysinh']) ?></td>
-                                        <td><?php echo $tv['gioitinh'] == 1 ? 'Nam' : 'Nữ' ?></td>
-                                        <td><?php echo $tv['sdt'] ?></td>
-                                        <td><?php echo $lib->dateformat($pc['tgbatdau'], 1) ?></td>
-                                        <td><?php echo $lib->dateformat($pc['tgketthuc'], 1) ?></td>
-                                        <td>
-                                            <button type="button" class="btn btn-info editpc" data-toggle="modal"
-                                                    data-target="#detail" data-id="<?php echo $pc['mapc'] ?>"><i
-                                                    class="fa fa-pencil"></i>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger removepc"
-                                                    data-id="<?php echo $pc['mapc'] ?>"><i
-                                                    class="fa fa-remove"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            }
-                            ?>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>Nhóm</th>
-                                <th>Họ tên</th>
-                                <th>Ngày sinh</th>
-                                <th>Giới tính</th>
-                                <th>SĐT</th>
-                                <th>TG bắt đầu</th>
-                                <th>TG kết thúc</th>
-                                <th>Sửa</th>
-                                <th>Xoá</th>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            <?php } ?>
-        </div>
-        <!-- /.col -->
+            <!-- /.col -->
+        <?php } ?>
         <div id="phancongnv" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Thông tin nhiệm vụ</h4>
+                        <h4 class="modal-title" id="modal-title">Danh sách nhiệm vụ của thành viên</h4>
                     </div>
                     <div class="modal-body" id="modal-body-phancong">
                         <table id="dsphancong" class="datatable table table-bordered table-striped">
@@ -347,7 +345,7 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Thông tin nhiệm vụ</h4>
+                            <h4 class="modal-title title">Thông tin nhiệm vụ</h4>
                         </div>
                         <div class="modal-body" id="modal-body">
                             <i class="fa fa-spinner fa-spin fa-3x"></i>
@@ -373,7 +371,7 @@
         });
 
         $('button.edithd').click(function () {
-            $('.modal-title').html("Thông tin hoạt động");
+            $('.title').html("Thông tin hoạt động");
             $('#modal-body').html('<i class="fa fa-spinner fa-spin fa-3x"></i><span class="sr-only">Loading...</span>');
             $('form#modal-form').attr('action', 'index.php?prog=thongtinhoatdong&mahd=' + $(this).attr('data-id') + '&act=edithd');
             $.post('index.php?prog=hoatdong&ajax=edit', {id: $(this).attr('data-id')}, function (data) {
@@ -382,7 +380,7 @@
         });
 
         $('button.addnv').click(function () {
-            $('.modal-title').html("Thông tin nhiệm vụ");
+            $('.title').html("Thông tin nhiệm vụ");
             $('#modal-body').html('<i class="fa fa-spinner fa-spin fa-3x"></i><span class="sr-only">Loading...</span>');
             $('form#modal-form').attr('action', 'index.php?prog=thongtinhoatdong&mahd=<?php echo $_GET["mahd"] ?>&act=addnv');
             $.post('index.php?prog=thongtinhoatdong&ajax=addnv', function (data) {
@@ -391,7 +389,7 @@
         });
 
         $('button.addpc').click(function () {
-            $('.modal-title').html("Thông tin phân công");
+            $('.title').html("Thông tin phân công");
             $('#modal-body').html('<i class="fa fa-spinner fa-spin fa-3x"></i><span class="sr-only">Loading...</span>');
             $('form#modal-form').attr('action', 'index.php?prog=phancong&mahd=<?php echo $_GET["mahd"] ?>&act=addpc');
             $.post('index.php?prog=phancong&ajax=addpc', {
@@ -403,9 +401,8 @@
 
         table.on('click', 'button', function () {
             var btn = $(this);
-
             if (btn.hasClass('editnv')) {
-                $('.modal-title').html("Thông tin nhiệm vụ");
+                $('.title').html("Thông tin nhiệm vụ");
                 $('#modal-body').html('<i class="fa fa-spinner fa-spin fa-3x"></i><span class="sr-only">Loading...</span>');
                 $('form#modal-form').attr('action', 'index.php?prog=thongtinhoatdong&mahd=<?php echo $_GET["mahd"] ?>&act=editnv&manv=' + btn.attr('data-id'));
                 $.post('index.php?prog=thongtinhoatdong&ajax=editnv', {manv: btn.attr('data-id')}, function (data) {
@@ -413,13 +410,16 @@
                 });
             } else if (btn.hasClass('removenv')) {
                 if (confirm("Xác nhận xoá?")) {
+                    btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
                     $.post('index.php?prog=thongtinhoatdong&ajax=removenv', {manv: btn.attr('data-id')}, function (data) {
                         if (data == 1) {
-                            table.DataTable().row('.nhiemvu.' + btn.attr('data-id')).remove().draw(false);
+                            var r = btn.closest('tr');
+                            table.DataTable().row(r).remove().draw(false);
                             alert("Xoá thành công!");
                         }
                         else alert("Có lỗi xảy ra, thử lại sau");
                     });
+                    btn.html('<i class="fa fa-remove"></i>');
                 }
             } else if (btn.hasClass('addtv')) {
                 $.post('index.php?prog=thongtinhoatdong&ajax=addtv',
@@ -430,7 +430,7 @@
                         if (data == 1) {
                             var r = btn.closest('tr');
                             var d = table.DataTable().row(r).data();
-                            d[5] = '<button type="button" class="btn btn-success viewtv" data-toggle="modal" data-target="#phancongnv">Xem</button>';
+                            d[5] = '<button type="button" class="btn btn-success viewtv" data-toggle="modal" data-target="#phancongnv" data-id="' + btn.attr('data-id') + '">Xem</button>';
                             d[6] = '<button type="button" class="btn btn-danger removetv" data-id="' + btn.attr('data-id') + '"><i class="fa fa-remove"></i></button>';
                             $('#dsthanhvien').DataTable().row.add(d).draw(false);
                             table.DataTable().row(r).remove().draw(false);
@@ -440,6 +440,7 @@
                     });
             } else if (btn.hasClass('removetv')) {
                 if (confirm("Xác nhận xoá?")) {
+                    btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
                     $.post('index.php?prog=thongtinhoatdong&ajax=removetv',
                         {
                             matv: btn.attr('data-id'),
@@ -457,10 +458,10 @@
                             }
                             else alert("Có lỗi xảy ra, thử lại sau");
                         });
+                    btn.html('<i class="fa fa-remove"></i>');
                 }
             } else if (btn.hasClass('viewtv')) {
-                $('.modal-title').html("Danh sách nhiệm vụ của thành viên");
-                $('.modal-title').append('<i class="fa fa-spinner fa-spin fa-3x"></i><span class="sr-only">Loading...</span>');
+                $('#modal-title').append('<i class="fa fa-spinner fa-spin fa-3x"></i><span class="sr-only">Loading...</span>');
                 $.post('index.php?prog=phancong&ajax=viewpc',
                     {
                         matv: btn.attr('data-id'),
@@ -469,11 +470,11 @@
                     function (data) {
                         $('#dsphancong').DataTable().clear();
                         $('#dsphancong').DataTable().rows.add(data).draw(false);
-                        $('.modal-title').html("Danh sách nhiệm vụ của thành viên");
+                        $('#modal-title').html("Danh sách nhiệm vụ của thành viên");
                         $('button.addpc').attr('data-id', btn.attr('data-id'));
                     });
             } else if (btn.hasClass('editpc')) {
-                $('.modal-title').html("Phân công nhiệm vụ");
+                $('.title').html("Phân công nhiệm vụ");
                 $('#modal-body').html('<i class="fa fa-spinner fa-spin fa-3x"></i><span class="sr-only">Loading...</span>');
                 $('form#modal-form').attr('action', 'index.php?prog=phancong&mahd=<?php echo $_GET["mahd"] ?>&act=eidtpc');
                 $.post('index.php?prog=phancong&ajax=editpc', {
@@ -483,11 +484,11 @@
                 });
             } else if (btn.hasClass('removepc')) {
                 if (confirm("Xác nhận xoá?")) {
+                    btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
                     $.post('index.php?prog=phancong&ajax=removepc',
                         {
                             mapc: btn.attr('data-id')
-                        },
-                        function (data) {
+                        }, function (data) {
                             if (data == 1) {
                                 var r = btn.closest('tr');
                                 table.DataTable().row(r).remove().draw(false);
@@ -495,6 +496,7 @@
                             }
                             else alert("Có lỗi xảy ra, thử lại sau");
                         });
+                    btn.html('<i class="fa fa-remove"></i>');
                 }
             }
         });

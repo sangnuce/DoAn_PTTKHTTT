@@ -19,7 +19,7 @@
 <div class="form-group">
     <label>Thời gian bắt đầu *</label>
     <input class="form-control" type="datetime-local" name="tgbatdau"
-           value="<?php echo isset($pc['tgbatdau']) ? date('Y-m-d\TH:i', strtotime($pc['tgbatdau'])) : '' ?>">
+           value="<?php echo isset($pc['tgbatdau']) ? date('Y-m-d\TH:i', strtotime($pc['tgbatdau'])) : '' ?>" required>
 </div>
 <div class="form-group">
     <label>Thời gian kết thúc</label>

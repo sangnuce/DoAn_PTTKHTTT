@@ -1,6 +1,7 @@
 <?php
 $title = 'Thêm mới đơn đăng ký';
 
+$showform = true;
 // Lấy ra các dữ liệu để hoàn thiện thông tin cần thiết cho form
 $strquery = "SELECT * FROM tbl_cauhoi";
 $cauhoi = $lib->selectall($strquery);
@@ -9,7 +10,7 @@ $thoigianpv = $lib->selectall($strquery);
 
 // Chuyển đổi định dạng hiển thị ngày tháng của thời gian phỏng vấn
 for ($i = 0; $i < count($thoigianpv); $i++) {
-    $thoigianpv[$i]['ngay'] = date("d-m-Y", strtotime($thoigianpv[$i]['ngay']));
+    $thoigianpv[$i]['ngay'] = $lib->dateformat($thoigianpv[$i]['ngay']);
 }
 
 // Kiểm tra tình trạng có nhận đơn nữa hay không
@@ -21,6 +22,7 @@ foreach ($rs as $row) {
 }
 if ($tuyentv['nhandon'] == 0) {
     $_SESSION['message'] = array('class' => 'alert-warning', 'content' => 'Hiện tại chúng tôi không nhận thêm đơn đăng ký!');
+    $showform = false;
 } else {
 // Kiểm tra dữ liệu gửi từ form
     if (isset($_POST['btndangky'])) {
@@ -62,6 +64,7 @@ if ($tuyentv['nhandon'] == 0) {
                 }
                 $lib->insert('tbl_dkthoigianpv', array('matv' => $id, 'matg' => $_POST['tgphongvan']));
                 $_SESSION['message'] = array('class' => 'alert-success', 'content' => 'Đăng ký thành công!');
+                $showform = false;
             }
         }
     }

@@ -26,8 +26,10 @@
 <div class="form-group">
     <label>Phỏng vấn *</label>
     <select name="quaphongvan" class="form-control">
-        <option value="1" <?php echo (isset($kq['quaphongvan']) && $kq['quaphongvan'] == 1) ? 'selected' : '' ?>>Đạt</option>
-        <option value="0" <?php echo (isset($kq['quaphongvan']) && $kq['quaphongvan'] == 0) ? 'selected' : '' ?>>Không đạt
+        <option value="1" <?php echo (isset($kq['quaphongvan']) && $kq['quaphongvan'] == 1) ? 'selected' : '' ?>>Đạt
+        </option>
+        <option value="0" <?php echo (isset($kq['quaphongvan']) && $kq['quaphongvan'] == 0) ? 'selected' : '' ?>>Không
+            đạt
         </option>
     </select>
 </div>
@@ -35,15 +37,15 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label>TeamGame *</label>
-            <input class="form-control" type="text" name="teamgame"
-                   value="<?php echo isset($kq['teamgame']) ? $kq['teamgame'] : '' ?>">
+            <input class="form-control" type="number" min="0" name="teamgame"
+                   value="<?php echo isset($kq['teamgame']) ? $kq['teamgame'] : '' ?>" required>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
             <label>TeamWork *</label>
-            <input class="form-control" type="text" name="teamwork"
-                   value="<?php echo isset($kq['teamwork']) ? $kq['teamwork'] : '' ?>">
+            <input class="form-control" type="number" min="0" name="teamwork"
+                   value="<?php echo isset($kq['teamwork']) ? $kq['teamwork'] : '' ?>" required>
         </div>
     </div>
 </div>

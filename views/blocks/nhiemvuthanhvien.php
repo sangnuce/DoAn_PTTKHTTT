@@ -1,12 +1,26 @@
-<?php
-$rs = array();
-foreach ($phancong as $pc) {
-    $row[0] = $pc['noidung'];
-    $row[1] = $lib->dateformat($pc['tgbatdau'], 1);
-    $row[2] = $lib->dateformat($pc['tgketthuc'], 1);
-    $row[3] = '<button type="button" class="btn btn-info editpc" data-toggle="modal" data-target="#detail" data-id="' . $pc['mapc'] . '"><i class="fa fa-pencil"></i></button>';
-    $row[4] = '<button type = "button" class="btn btn-danger removepc" data-id = "' . $pc['mapc'] . '" ><i class="fa fa-remove" ></i></button>';
-    $rs[] = $row;
-}
-die(json_encode($rs));
-?>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Nhiệm vụ</th>
+        <th>TG bắt đầu</th>
+        <th>TG kết thúc</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php if (count($phancong) == 0) {
+        ?>
+        <tr>
+            <td colspan="3">Chưa nhận nhiệm vụ</td>
+        </tr>
+        <?php
+    } else {
+        foreach ($phancong as $pc) { ?>
+            <tr>
+                <td><?php echo $pc['noidung'] ?></td>
+                <td><?php echo $lib->dateformat($pc['tgbatdau'], 1) ?></td>
+                <td><?php echo $lib->dateformat($pc['tgketthuc'], 1) ?></td>
+            </tr>
+        <?php }
+    } ?>
+    </tbody>
+</table>

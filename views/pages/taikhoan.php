@@ -1,8 +1,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Đơn đăng ký
-        <small>Danh sách câu hỏi</small>
+        Tài khoản
+        <small>Danh sách tài khoản</small>
     </h1>
 </section>
 
@@ -14,7 +14,7 @@
                 <div class="box-header with-border">
                     <div class="col-sm-9">
                         <h3 class="box-title">Tổng số: <span
-                                class="text-red text-bold"><?php echo count($cauhoi) ?></span> câu hỏi</h3>
+                                class="text-red text-bold"><?php echo count($taikhoan) ?></span> tài khoản</h3>
                     </div>
                     <div class="col-sm-3">
                         <button class="btn btn-primary pull-right add" type="button"
@@ -24,31 +24,28 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <table id="dscauhoidk" class="table table-bordered table-striped">
+                    <table id="dstaikhoan" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Mã câu hỏi</th>
-                            <th>Nội dung</th>
-                            <th>Sửa</th>
+                            <th>Họ tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>SĐT</th>
                             <th>Xoá</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-                        foreach ($cauhoi as $ch) {
+                        foreach ($taikhoan as $tk) {
                             ?>
-                            <tr id="<?php echo $ch['mach'] ?>">
-                                <td><?php echo $ch['mach'] ?></td>
-                                <td><?php echo $ch['noidung'] ?></td>
-                                <td>
-                                    <button type="button" class="btn btn-info edit" data-toggle="modal"
-                                            data-target="#detail" data-id="<?php echo $ch['mach'] ?>"><i
-                                            class="fa fa-pencil"></i>
-                                    </button>
-                                </td>
+                            <tr>
+                                <td><?php echo $tk['hoten'] ?></td>
+                                <td><?php echo $lib->dateformat($tk['ngaysinh']) ?></td>
+                                <td><?php echo $tk['gioitinh'] == 1 ? 'Nam' : 'Nữ' ?></td>
+                                <td><?php echo $tk['sdt'] ?></td>
                                 <td>
                                     <button type="button" class="btn btn-danger remove"
-                                            data-id="<?php echo $ch['mach'] ?>"><i
+                                            data-id="<?php echo $tk['matv'] ?>"><i
                                             class="fa fa-remove"></i></button>
                                 </td>
                             </tr>
@@ -56,9 +53,10 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th>Mã câu hỏi</th>
-                            <th>Nội dung</th>
-                            <th>Sửa</th>
+                            <th>Họ tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>SĐT</th>
                             <th>Xoá</th>
                         </tr>
                         </tfoot>
@@ -76,7 +74,7 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Thông tin câu hỏi</h4>
+                            <h4 class="modal-title">Thông tin tài khoản</h4>
                         </div>
                         <div class="modal-body" id="modal-body">
                             <i class="fa fa-spinner fa-spin fa-3x"></i>
@@ -96,31 +94,25 @@
 <!-- /.content -->
 <script>
     $(function () {
-        var table = $('#dscauhoidk');
+        var table = $('#dstaikhoan');
         table.DataTable();
 
         $('button.add').click(function () {
             $('#modal-body').html('<i class="fa fa-spinner fa-spin fa-3x"></i><span class="sr-only">Loading...</span>');
-            $('form#modal-form').attr('action', 'index.php?prog=cauhoidk&act=add');
-            $.post('index.php?prog=cauhoidk&ajax=add', function (data) {
+            $('form#modal-form').attr('action', 'index.php?prog=taikhoan&act=add');
+            $.post('index.php?prog=taikhoan&ajax=add', function (data) {
                 $('#modal-body').html(data);
             });
         });
         table.on('click', 'button', function () {
             var btn = $(this);
-
-            if (btn.hasClass('edit')) {
-                $('#modal-body').html('<i class="fa fa-spinner fa-spin fa-3x"></i><span class="sr-only">Loading...</span>');
-                $('form#modal-form').attr('action', 'index.php?prog=cauhoidk&act=edit&id=' + btn.attr('data-id'));
-                $.post('index.php?prog=cauhoidk&ajax=edit', {id: btn.attr('data-id')}, function (data) {
-                    $('#modal-body').html(data);
-                });
-            } else if (btn.hasClass('remove')) {
+            if (btn.hasClass('remove')) {
                 if (confirm("Xác nhận xoá?")) {
                     btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
-                    $.post('index.php?prog=cauhoidk&ajax=remove', {id: btn.attr('data-id')}, function (data) {
+                    $.post('index.php?prog=taikhoan&ajax=remove', {id: btn.attr('data-id')}, function (data) {
                         if (data == 1) {
-                            table.DataTable().row('#' + btn.attr('data-id')).remove().draw(false);
+                            var r = btn.closest('tr');
+                            table.DataTable().row(r).remove().draw(false);
                             alert("Xoá thành công!");
                         }
                         else alert("Có lỗi xảy ra, thử lại sau");
