@@ -60,7 +60,8 @@ class LIB
             $listwhere .= $key . '=:' . $key . ' AND ';
 
         $listwhere = trim($listwhere, ' AND ');
-        $strquery = "UPDATE $table SET $listcol WHERE $listwhere";
+        $strquery = "UPDATE $table SET $listcol";
+        if($listwhere != '') $strquery.= " WHERE $listwhere";
         $re = $this->pdo->prepare($strquery);
         if (!$re) die('Error Query:' . $strquery);
         return $re->execute(array_merge($data, $dieukien));
@@ -73,7 +74,8 @@ class LIB
             $listwhere .= $key . '=:' . $key . ' AND ';
 
         $listwhere = trim($listwhere, ' AND ');
-        $strquery = "DELETE FROM $table WHERE $listwhere";
+        $strquery = "DELETE FROM $table";
+        if($listwhere != '') $strquery.= " WHERE $listwhere";
         $re = $this->pdo->prepare($strquery);
         if (!$re) die('Error Query:' . $strquery);
         return $re->execute($dieukien);
@@ -130,16 +132,15 @@ class LIB
         return date('d-m-Y', strtotime($date));
     }
 
-    public function attempt($info = array())
+    public function attempt($sdt, $matkhau)
     {
-        $strquery = "SELECT * FROM tbl_taikhoan WHERE taikhoan=:taikhoan AND matkhau=:matkhau LIMIT 0,1";
+        $strquery = "SELECT tbl_thanhvien.* 
+                FROM tbl_thanhvien JOIN tbl_taikhoan ON tbl_thanhvien.matv = tbl_taikhoan.matv 
+                WHERE sdt=:sdt AND matkhau=:matkhau LIMIT 0,1";
         $re = $this->pdo->prepare($strquery);
         if (!$re) die('Error Query:' . $strquery);
-        $re->execute($info);
+        $re->execute(array('sdt' => $sdt, 'matkhau' => md5($matkhau)));
         if ($re->rowCount() > 0) {
-            $tk = $re->fetch(PDO::FETCH_ASSOC);
-            $strquery = "SELECT * FROM tbl_thanhvien WHERE matv=" . $tk['matv'];
-            $re = $this->pdo->query($strquery);
             return $re->fetch(PDO::FETCH_ASSOC);
         } else return array();
     }

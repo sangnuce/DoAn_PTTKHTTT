@@ -146,6 +146,7 @@
                     $('#modal-body').html(data);
                 });
             } else if (btn.hasClass('pass')) {
+                btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
                 $.post('index.php?prog=dondangky&ajax=pass', {id: btn.attr('data-id')}, function (data) {
                     if (data == 1) {
                         btn.removeClass('pass');
@@ -155,7 +156,9 @@
                     }
                     else alert("Có lỗi xảy ra, thử lại sau");
                 });
+                btn.html('<i class="fa fa-check"></i>');
             } else if (btn.hasClass('unpass')) {
+                btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
                 $.post('index.php?prog=dondangky&ajax=unpass', {id: btn.attr('data-id')}, function (data) {
                     if (data == 1) {
                         btn.removeClass('unpass');
@@ -165,8 +168,10 @@
                     }
                     else alert("Có lỗi xảy ra, thử lại sau");
                 });
+                btn.html('<i class="fa fa-check"></i>');
             } else if (btn.hasClass('remove')) {
                 if (confirm("Xác nhận xoá?")) {
+                    btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
                     $.post('index.php?prog=dondangky&ajax=remove', {id: btn.attr('data-id')}, function (data) {
                         if (data == 1) {
                             table.DataTable().row('#' + btn.attr('data-id')).remove().draw(false);
@@ -174,6 +179,7 @@
                         }
                         else alert("Có lỗi xảy ra, thử lại sau");
                     });
+                    btn.html('<i class="fa fa-remove"></i>');
                 }
             }
         });

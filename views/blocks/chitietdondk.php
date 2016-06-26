@@ -24,7 +24,7 @@
         <div class="form-group">
             <label>Họ tên *</label>
             <input class="form-control" type="text" name="hoten"
-                   value="<?php echo $don['hoten'] ?>">
+                   value="<?php echo $don['hoten'] ?>" required>
         </div>
         <div class="form-group">
             <label>MSSV</label>
@@ -46,8 +46,8 @@
         </div>
         <div class="form-group">
             <label>Số điện thoại *</label>
-            <input class="form-control" type="text" name="sdt"
-                   value="<?php echo $don['sdt'] ?>">
+            <input class="form-control" type="number" name="sdt"
+                   value="<?php echo $don['sdt'] ?>" required>
         </div>
     </div>
 </div>
@@ -62,7 +62,7 @@ foreach ($cauhoi as $ch) {
     <div class="form-group">
         <label><?php echo $ch['noidung'] ?> *</label>
             <textarea class="form-control" style="resize: vertical"
-                      name="cauhoi[<?php echo $ch['mach'] ?>]"><?php echo isset($traloi[$don['matv']][$ch['mach']]) ? $traloi[$don['matv']][$ch['mach']] : '' ?></textarea>
+                      name="cauhoi[<?php echo $ch['mach'] ?>]" required><?php echo isset($traloi[$ch['mach']]) ? $traloi[$ch['mach']] : '' ?></textarea>
     </div>
 <?php } ?>
 <div class="form-group">
@@ -71,7 +71,7 @@ foreach ($cauhoi as $ch) {
         <?php
         foreach ($thoigianpv as $tg) {
             ?>
-            <option value="<?php echo $tg['matg'] ?>" <?php echo ($dkthoigianpv[$don['matv']]['matg'] == $tg['matg']) ? 'selected' : '' ?>>
+            <option value="<?php echo $tg['matg'] ?>" <?php echo ($dkthoigianpv['matg'] == $tg['matg']) ? 'selected' : '' ?>>
                 <?php echo $tg['sangchieu'] == 0 ? 'Sáng ' . $tg['ngay'] : 'Chiều ' . $tg['ngay'] ?>
             </option>
         <?php } ?>

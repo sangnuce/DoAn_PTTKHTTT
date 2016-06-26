@@ -112,10 +112,12 @@
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
+            increaseArea: '20%'
         });
         var table = $('#dsdanhgia');
-        table.DataTable();
+        table.DataTable({
+            "aaSorting": []
+        });
 
         table.on('click', 'button', function () {
             var btn = $(this);

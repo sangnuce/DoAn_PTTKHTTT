@@ -47,17 +47,8 @@ if (isset($_POST['btnsubmit'])) {
 $strquery = "SELECT tbl_thanhvien.* FROM tbl_thanhvien LEFT JOIN tbl_chianhom ON tbl_thanhvien.matv = tbl_chianhom.matv WHERE manhom IS NULL AND ladoitruong=0 ORDER BY tinhtrang, ngaygianhap";
 $dondangky = $lib->selectall($strquery);
 
-$traloi = array();
-foreach ($dondangky as $don) {
-    $strquery = "SELECT * FROM tbl_traloi WHERE matv = " . $don['matv'];
-    $rs = $lib->selectall($strquery);
-    foreach ($rs as $tl) {
-        $traloi[$don['matv']][$tl['mach']] = $tl['traloi'];
-    }
-}
-
 $dkthoigianpv = array();
-foreach ($dondangky as $don) {
+foreach($dondangky as $don) {
     $strquery = "SELECT tbl_thoigianpv.* FROM tbl_dkthoigianpv JOIN tbl_thoigianpv ON tbl_dkthoigianpv.matg = tbl_thoigianpv.matg WHERE matv = " . $don['matv'];
     $tg = $lib->selectone($strquery);
     $dkthoigianpv[$don['matv']] = array(
@@ -68,6 +59,23 @@ foreach ($dondangky as $don) {
 }
 
 if ($_GET['ajax']) {
+    $matv = $_POST['id'];
+    $traloi = array();
+    $strquery = "SELECT * FROM tbl_traloi WHERE matv = " . $matv;
+    $rs = $lib->selectall($strquery);
+    foreach ($rs as $tl) {
+        $traloi[$tl['mach']] = $tl['traloi'];
+    }
+
+    $dkthoigianpv = array();
+    $strquery = "SELECT tbl_thoigianpv.* FROM tbl_dkthoigianpv JOIN tbl_thoigianpv ON tbl_dkthoigianpv.matg = tbl_thoigianpv.matg WHERE matv = " . $matv;
+    $tg = $lib->selectone($strquery);
+    $dkthoigianpv = array(
+        'matg' => $tg['matg'],
+        'sangchieu' => $tg['sangchieu'],
+        'ngay' => $lib->dateformat($tg['ngay'])
+    );
+
     if ($_GET['ajax'] == 'view') {
         $strquery = "SELECT * FROM tbl_thanhvien WHERE matv = " . $_POST['id'];
         $don = $lib->selectone($strquery);
