@@ -5,10 +5,10 @@ if (isset($_SESSION['thanhvien'])) {
 }
 
 if (isset($_POST['btnsubmit'])) {
-    if ($_POST['sdt'] == "" || $_POST['matkhau'] == "") {
+    if ($_POST['taikhoan'] == "" || $_POST['matkhau'] == "") {
         $_SESSION['message'] = array('class' => 'alert-danger', 'content' => 'Thông tin không đầy đủ!');
     } else {
-        $tk = $lib->attempt($_POST['sdt'], $_POST['matkhau']);
+        $tk = $lib->attempt(array('taikhoan' => $_POST['taikhoan'], 'matkhau' => $_POST['matkhau']));
         if (count($tk) > 0) {
             $_SESSION['thanhvien'] = $tk;
             if (isset($_POST['remember'])) {

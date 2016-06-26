@@ -32,7 +32,7 @@ for ($i = 0; $i < count($nhomtv); $i++) {
     $nhomtv[$i] = array_merge($nhomtv[$i], $tv);
 }
 
-$strquery = "SELECT tbl_thanhvien.*, tennhom, lanhomtruong 
+$strquery = "SELECT tbl_thanhvien.*, tennhom 
         FROM (tbl_thanhvien JOIN tbl_chianhom ON tbl_thanhvien.matv = tbl_chianhom.matv) 
         JOIN tbl_nhomtv ON tbl_chianhom.manhom = tbl_nhomtv.manhom
         ORDER BY ngaygianhap DESC";

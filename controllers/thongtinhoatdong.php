@@ -1,5 +1,5 @@
 <?php
-$title = 'Thông tin chi tiết hoạt động';
+$title = 'Danh sách hoạt động';
 $lib->checkLogin();
 
 if ($_GET['ajax']) {

@@ -62,8 +62,6 @@
             var btn = $(this);
 
             if (btn.hasClass('update')) {
-                btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
-
                 var giatri = 0;
                 if (btn.hasClass('btn-default')) giatri = 1;
 
@@ -82,17 +80,14 @@
                     }
                     else alert("Có lỗi xảy ra, thử lại sau");
                 });
-                btn.html('<i class="fa fa-check"></i>');
             } else if (btn.hasClass('delete')) {
                 if (confirm("Xác nhận xoá tất cả thông tin đơn đăng ký tuyển thành viên?")) {
-                    btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
                     $.post('index.php?prog=caidattuyentv&ajax=delete', function (data) {
                         if (data == 1) {
                             window.location.href = "index.php?prog=caidattuyentv";
                         }
                         else alert("Có lỗi xảy ra, thử lại sau");
                     });
-                    btn.html('<i class="fa fa-remove"></i>');
                 }
             }
         });

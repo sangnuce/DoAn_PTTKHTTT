@@ -42,9 +42,9 @@ if (isset($_SESSION['message'])) {
 
         <form action="" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Số điện thoại" name="sdt"
-                       value="<?php echo isset($_POST['sdt']) ? $_POST['sdt'] : '' ?>">
-                <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+                <input type="text" class="form-control" placeholder="Tài khoản" name="taikhoan"
+                       value="<?php echo isset($_POST['taikhoan']) ? $_POST['taikhoan'] : '' ?>">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <input type="password" class="form-control" placeholder="Mật khẩu" name="matkhau"

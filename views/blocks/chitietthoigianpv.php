@@ -9,6 +9,5 @@
 </div>
 <div class="form-group">
     <label>Ngày *</label>
-    <input type="date" class="form-control" name="ngay" value="<?php echo isset($tg['ngay']) ? $tg['ngay'] : '' ?>"
-           required>
+    <input type="date" class="form-control" name="ngay" value="<?php echo isset($tg['ngay']) ? $tg['ngay'] : '' ?>">
 </div>

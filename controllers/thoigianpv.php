@@ -25,11 +25,12 @@ if (isset($_POST['btnsubmit'])) {
     if ($_POST['sangchieu'] == '' || $_POST['ngay'] == '') {
         $_SESSION['message'] = array('class' => 'alert-danger', 'content' => 'Các trường có dấu * là bắt buộc!');
     } else {
-        $thoigian = array('sangchieu' => $_POST['sangchieu'], 'ngay' => $_POST['ngay']);
         if ($_GET['act'] == 'add') {
+            $thoigian = array('sangchieu' => $_POST['sangchieu'], 'ngay' => $_POST['ngay']);
             $id = $lib->insert('tbl_thoigianpv', $thoigian);
             $_SESSION['message'] = array('class' => 'alert-success', 'content' => 'Thêm mới thành công!');
         } else if ($_GET['act'] == 'edit') {
+            $thoigian = array('sangchieu' => $_POST['sangchieu'], 'ngay' => $_POST['ngay']);
             $lib->update('tbl_thoigianpv', $thoigian, array('matg' => $_GET['id']));
             $_SESSION['message'] = array('class' => 'alert-success', 'content' => 'Chỉnh sửa thành công!');
         }
