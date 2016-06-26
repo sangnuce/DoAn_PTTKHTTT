@@ -289,7 +289,8 @@
                     btn.html('<i class="fa fa-spinner fa-spin"></i><span class="sr-only">Loading...</span>');
                     $.post('index.php?prog=thanhvien&ajax=remove', {id: btn.attr('data-id')}, function (data) {
                         if (data == 1) {
-                            table.DataTable().row('#' + btn.attr('data-id')).remove().draw(false);
+                            var r = btn.closest('tr');
+                            table.DataTable().row(r).remove().draw(false);
                         }
                         else alert("Có lỗi xảy ra, thử lại sau");
                     });

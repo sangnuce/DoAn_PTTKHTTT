@@ -11,7 +11,7 @@
 <div class="form-group">
     <label>Thời gian kết thúc</label>
     <input class="form-control" type="datetime-local" name="tgketthuc"
-           value="<?php echo isset($hd['tgketthuc']) ? date('Y-m-d\TH:i',strtotime($hd['tgketthuc'])) : '' ?>" required>
+           value="<?php echo isset($hd['tgketthuc']) ? date('Y-m-d\TH:i',strtotime($hd['tgketthuc'])) : '' ?>">
 </div>
 <div class="form-group">
     <label>Số người</label>
