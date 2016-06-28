@@ -81,49 +81,6 @@ class LIB
         return $re->execute($dieukien);
     }
 
-    public function sendmail($email, $name, $subject, $body)
-    {
-        require_once('class.phpmailer.php');
-        $mail = new PHPMailer;
-
-        //Phần 1: Cấu hình thông tin kết nối đến Server Free trung gian kia
-        $mail->IsSMTP();                                //Khai báo hệ thống gửi mail theo cơ chế SMTP
-        $mail->Host = 'smtp.gmail.com';                 //Server trung gian gửi mail
-        $mail->Port = '465';                            //Cổng chạy phần mềm
-        $mail->SMTPAuth = true;                         //Kích hoạt chế độ xác nhận người dùng
-        $mail->Username = 'svtnnuce@gmail.com';         //Tên đăng nhập vào hệ thống trên
-        $mail->Password = 'svtnnuce';                   //Mật khẩu tương ứng
-        $mail->SMTPSecure = 'ssl';                      //Chế độ bảo mật SSL
-        //Phần 2: Cấu hinh nội dung gửi mail: người nhận, người gửi, tiêu đề, nội dung ...
-        $mail->CharSet = 'utf-8';                       //Nội dung TIếng Việt
-        $mail->IsHTML(true);                            //Nội dung cho phép thẻ HTML
-        $mail->FromName = 'Đội SVTN trường ĐH Xây Dựng';//Tên người gửi thư
-        $mail->AddAddress($email, $name);               //Thêm địa chỉ người nhận EMail
-        //$mail->AddReplyTo('jacki_tom@yahoo.com','Ly');//Thêm địa chỉ của người nhận trả lời
-        $mail->Subject = $subject;                      //Tiêu đề
-        $mail->Body = $body;                            //Nội dung
-        $mail->Send();                                  //Gọi Phương thức Send gửi mail đi
-        return $mail->ErrorInfo;
-    }
-
-    public function makeslug($str)
-    {
-        $char = array(
-            'a' => 'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ|Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
-            'd' => 'đ|Đ',
-            'e' => 'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ|É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
-            'i' => 'í|ì|ỉ|ĩ|ị|Í|Ì|Ỉ|Ĩ|Ị',
-            'o' => 'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ|Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
-            'u' => 'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
-            'y' => 'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',);
-        $str = str_replace(' ', '-', $str);
-        foreach ($char as $key => $val)
-            $str = preg_replace("/(" . $val . ")/", $key, $str);
-        $str = preg_replace("/[^-a-zA-Z0-9]/", "", $str);
-        $str = preg_replace("/[-]+/", "-", $str);
-        return $str;
-    }
-
     public function dateformat($date, $time = 0)
     {
         if ($date == 0) return '';
